@@ -1,0 +1,21 @@
+mode: ContinuousDeployment
+branches:
+  main:
+    regex: ^main$
+    mode: ContinuousDeployment
+    tag: ''
+    increment: Minor
+    prevent-increment-of-merged-branch-version: true
+    track-merge-target: false
+  pull-request:
+    regex: ^(pull|pull\-requests|pr)[/-]
+    mode: ContinuousDeployment
+    tag: PullRequest
+    increment: Inherit
+    tag-number-pattern: '[/-](?<number>\d+)[-/]'
+ignore:
+  sha: []
+major-version-bump-message: '\+semver:\s?(breaking|major)'
+minor-version-bump-message: '\+semver:\s?(feature|minor)'
+patch-version-bump-message: '\+semver:\s?(fix|patch)'
+no-bump-message: '\+semver:\s?(none|skip)'
