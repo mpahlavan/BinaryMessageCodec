@@ -2,7 +2,20 @@
 
 A binary message encoding/decoding implementation for real-time communication signaling protocols.
 
-## Part 1: Design and Implementation
+A small, dependency-free .NET 10 library: a compact binary wire format for signaling messages (headers + payload), strict validation on encode, corruption detection on decode, 28 unit tests, benchmarks and a GitHub Actions pipeline.
+
+## Quick start
+
+```bash
+git clone https://github.com/mpahlavan/BinaryMessageCodec.git
+cd BinaryMessageCodec
+dotnet test                                        # 28 tests
+dotnet run --project BinaryMessageCodec.Samples    # SIP, WebRTC and error-handling examples
+```
+
+Requires the [.NET 10 SDK](https://dotnet.microsoft.com/download). Full build, benchmark and packaging commands are in [Building and Running](#building-and-running).
+
+## Design and Implementation
 
 ### Binary Format
 
@@ -34,7 +47,7 @@ Using the minimum bytes needed for each field keeps the encoding efficient witho
 
 **Validation strategy**: Validate everything during encoding (fail-fast), detect corruption during decoding (defensive).
 
-**ASCII-only headers**: Required by spec, and appropriate for signaling protocol headers which are typically identifiers/metadata.
+**ASCII-only headers**: Appropriate for signaling protocol headers which are typically identifiers/metadata.
 
 ### Assumptions
 
@@ -74,7 +87,7 @@ Run benchmarks: `dotnet run --project BinaryMessageCodec.Benchmarks -c Release`
 
 ---
 
-## Part 2: Deployment & Operations
+## Deployment & Operations
 
 ### 1. Packaging
 
@@ -245,6 +258,6 @@ BinaryMessageCodec/
 All 28 tests pass, covering encoding/decoding, validation, edge cases, and binary format verification.
 
 
-## Refrences
+## References
 - [Reading and Writing Packets](https://gafferongames.com/post/reading_and_writing_packets/)
 - [Implementing a Custom Binary Protocol for your game](https://www.dynetisgames.com/2017/06/14/custom-binary-protocol-javascript/)
